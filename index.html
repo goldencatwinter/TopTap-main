@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP & COLOR</title>
+    <title>TOP, COLOR & BUBBLE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -18,6 +18,7 @@
         /* --- 레이아웃 --- */
         .container {
             display: flex;
+            flex-direction: column; /* 가로 분할(상하 배치)로 변경 */
             width: 100%;
             height: 100%;
             position: relative;
@@ -29,16 +30,16 @@
             transition: flex 0.4s ease; /* 부드러운 비율 변경 */
             cursor: pointer;
             overflow: hidden;
-            border-right: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1); /* 세로 구분선 대신 가로 구분선 사용 */
         }
 
         .split:last-child {
-            border-right: none;
+            border-bottom: none;
         }
 
-        /* 호버 효과: 마우스 올린 쪽이 살짝 넓어짐 */
+        /* 호버 효과: 마우스 올린 쪽의 높이가 넓어짐 */
         .split:hover {
-            flex: 1.3;
+            flex: 1.8;
         }
         
         /* 호버 시 오버레이 투명화 (게임 화면이 잘 보이게) */
@@ -63,7 +64,7 @@
             height: 100%;
             border: none;
             display: block;
-            /* iframe 내부 클릭 방지 (클릭 시 페이지 이동 이벤트를 상위 div에서 잡기 위함) */
+            /* iframe 내부 클릭 방지 */
             pointer-events: none; 
         }
 
@@ -74,7 +75,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4); /* 평소엔 약간 어둡게 */
+            background: rgba(0,0,0,0.5); /* 평소엔 약간 어둡게 */
             z-index: 2;
             transition: background 0.3s, backdrop-filter 0.3s;
             backdrop-filter: blur(2px);
@@ -85,30 +86,35 @@
             opacity: 0.9;
         }
 
-        /* 모바일 대응 */
+        /* 모바일 대응: 이미 상하 배치이므로 간격 유지 */
         @media (max-width: 768px) {
-            .container { flex-direction: column; }
-            .split { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .split:hover { flex: 1.3; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- [LEFT] TOP 게임 섹션 -->
-        <!-- 클릭 시 바로 해당 URL로 이동 -->
-        <div class="split left" onclick="location.href='https://goldencatwinter.github.io/Top/'">
+        <!-- [TOP] TOP 게임 섹션 -->
+        <div class="split" onclick="location.href='https://goldencatwinter.github.io/Top/'">
             <div class="game-visual">
                 <iframe src="https://goldencatwinter.github.io/Top/" class="game-frame" title="Top Game"></iframe>
             </div>
             <div class="overlay"></div>
         </div>
 
-        <!-- [RIGHT] COLOR 게임 섹션 -->
-        <!-- 클릭 시 바로 해당 URL로 이동 -->
-        <div class="split right" onclick="location.href='https://goldencatwinter.github.io/COLOR/'">
+        <!-- [MIDDLE] COLOR 게임 섹션 -->
+        <div class="split" onclick="location.href='https://goldencatwinter.github.io/COLOR/'">
             <div class="game-visual">
                 <iframe src="https://goldencatwinter.github.io/COLOR/" class="game-frame" title="Color Game"></iframe>
+            </div>
+            <div class="overlay"></div>
+        </div>
+
+        <!-- [BOTTOM] BUBBLE 게임 섹션 -->
+        <div class="split" onclick="location.href='https://goldencatwinter.github.io/Bubble/'">
+            <div class="game-visual">
+                <iframe src="https://goldencatwinter.github.io/Bubble/" class="game-frame" title="Bubble Game"></iframe>
             </div>
             <div class="overlay"></div>
         </div>
